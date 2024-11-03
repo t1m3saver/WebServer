@@ -9,7 +9,7 @@ class BasicLogger : public LoggerItf{
 public:
     BasicLogger(const std::string& prefix_) : prefix(prefix_) {}
 
-    void Log(const std::string& message) override {
+    void Log(const std::string& message, LogLevel logLevel = LogLevel::INFO) override {
         std::string timestamp = GetCurrentTime();
         std::cout << timestamp << " " << prefix << message << std::endl;
     }

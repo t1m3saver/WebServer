@@ -8,6 +8,18 @@
 namespace  WebServer::Log {
 class FileLogger : public LoggerItf {
 public:
+    static FileLogger& getInstance(const){
+
+    }
+    void Log(const std::string& message, LogLevel logLevel = LogLevel::INFO) override {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (log_file_.is_open()) {
+            std::string timestamp = GetCurrentTime();
+            log_file_ << timestamp << "[" << LogLevelToString(logLevel) << "]" << message << std::endl;
+            log_file_.flush();
+        }
+    }
+private:
     FileLogger(const std::string& filename) : filename_(filename) {
         log_file_.open(filename_, std::ios::app);
     }
@@ -18,16 +30,6 @@ public:
         }
     }
 
-    void Log(const std::string& message, LogLevel logLevel = LogLevel::INFO) override {
-        std::lock_guard<std::mutex> lock(mutex_);
-        if (log_file_.is_open()) {
-            std::string timestamp = GetCurrentTime();
-            log_file_ << timestamp << "[" << LogLevelToString(logLevel) << "]" << message << std::endl;
-            log_file_.flush();
-        }
-    }
-
-private:
 
     std::string GetCurrentTime() {
         std::time_t now = std::time(nullptr);
