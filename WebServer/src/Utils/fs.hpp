@@ -4,11 +4,7 @@
 #include <yaml-cpp/yaml.h>
 #include <map>
 
-namespace Utils::fs {
-enum class LogConfig{
-    outputFileName = 0,
-}
-
+namespace utils::fs {
     // 检查文件是否存在
     bool isFileExist(const std::string& filePath);
 
@@ -40,5 +36,5 @@ enum class LogConfig{
     bool copyFile(const std::string& sourcePath, const std::string& destinationPath);
 
     //获取配置文件的信息
-    static std::map<string, stirng> readConfig(const std::string& filename = "../../config.yaml");
+    static std::map<std::string, std::map<std::string, std::string>> readConfig(const std::string& filename = "../../config.yaml");
 }

@@ -1,4 +1,4 @@
-#include "../LogSystem/FileLogger.hpp"
+#include "../LogSystem/LoggerItf.hpp"
 #include <iostream>
 #include <string>
 #include <unistd.h>
