@@ -31,6 +31,8 @@ int main(int argc, char* argv[]){
     int inet_pton_ret = inet_pton(AF_INET, ip, &address.sin_addr.s_addr);//arpa/inet.h 设置，把可读ip地址转为网络字节序地址并且放置到ipv4地址结构中
     assert(inet_pton_ret == 1);
 
+
+
     int bindRet = bind(socketFd, reinterpret_cast<struct sockaddr*>(&address), sizeof(address));//命名socket地址
     assert(bindRet == 0);
 
